@@ -11,6 +11,7 @@ import com.spechwsa.cantine.domain.repositories.EleveRepository;
 import com.spechwsa.cantine.domain.repositories.EnseignantRepository;
 
 /**
+ * https://dzone.com/articles/spring-boot-applicationrunner-and-commandlinerunne
  * Pour que ce composant s'execute 
  * Mettre la propriété cantine.db.init à true dans le fichier application.properties
 **/
