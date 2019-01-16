@@ -17,6 +17,7 @@ public class ServiceCantine {
     public ServiceCantine( AuthenticationGateway autentificationGateway, CantineRepository cantineRepository ) {
         this.autentificationGateway = autentificationGateway;
         cantine = new Cantine( cantineRepository );
+        System.out.println( "Service Cantine Created" );
     }
 
     public void enregisterPresence( Enseignant enseignant, Eleve eleve ) throws EnseignantNonAutentifieException {
@@ -31,6 +32,11 @@ public class ServiceCantine {
 
     public Set<Eleve> getCantineDuJour() {
         return cantine.getCantineDuJour();
+    }
+
+    public boolean estEnregistreAujourdhui( Eleve eleve ) {
+        // TODO Auto-generated method stub
+        return cantine.estEnregistreAujourdhui( eleve );
     }
 
 }

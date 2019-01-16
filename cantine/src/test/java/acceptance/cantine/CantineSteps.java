@@ -62,6 +62,7 @@ public class CantineSteps {
         // verification inscription
         try {
             assertTrue( serviceCantine.getCantineDuJour().contains( optionalEleve.get() ) );
+            assertTrue(serviceCantine.estEnregistreAujourdhui(optionalEleve.get()));
         } catch ( NoSuchElementException e ) {
             fail( "Eléve non trouvé" );
         }

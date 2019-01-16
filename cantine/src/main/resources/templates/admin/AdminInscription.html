@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Inscription cantine</title>
+</head>
+<body>
+	<h3>Liste des éleves</h3>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th><th>Prénom</th><th>Nom</th><th>Inscrit</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="e:${EleveCantineMap}">
+				<td th:text="${e.key.id}"></td>
+				<td th:text="${e.key.firstName}"></td>
+				<td th:text="${e.key.lastName}"></td>
+				<td th:text=${e.value}></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

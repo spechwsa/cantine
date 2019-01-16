@@ -19,4 +19,8 @@ public class Cantine {
         return cantineRepository.getAll();
     }
 
+    public boolean estEnregistreAujourdhui( Eleve eleve ) {
+        return getCantineDuJour().contains( eleve );
+    }
+
 }
