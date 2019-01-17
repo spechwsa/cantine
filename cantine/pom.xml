@@ -81,8 +81,6 @@ thymeleaf-spring4
 			<version>2.1.1.RELEASE</version>
 		</dependency>
 
-
-
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -91,6 +89,23 @@ thymeleaf-spring4
 			<scope>test</scope>
 		</dependency>
 
+
+		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>bootstrap</artifactId>
+		    <version>4.2.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator -->
+		<!-- pour ne pas préciser la version des librairie dans les fichiers html  -->
+		<!-- A partir de la version 4.2 de SPRING, le framework va automatiquement détecter webs-locator dans le class path -->
+		<!-- et l'utiliser pour résoudre les versions des WEBJARS utilisés.-->	
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>webjars-locator</artifactId>
+		    <version>0.34</version>
+		</dependency>
 
 	</dependencies>
 
