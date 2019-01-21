@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Inscription cantine</title>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/dist/jquery.min.js}"></script>
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"
+th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+/>
+<body>
+	<div class="container" th:fragment="listEleves">
+		<h3>Liste des élèves</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th><th>Prénom</th><th>Nom</th><th>Inscrire?</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="e:${EleveCantineMap}">
+					<td th:text="${e.key.id}"></td>
+					<td th:text="${e.key.firstName}"></td>
+					<td th:text="${e.key.lastName}"></td>
+					<!-- <td th:text=${e.value}></td> -->
+					<td>
+							<!-- pour l 'utilisation de th:data voir https://github.com/thymeleaf/thymeleaf/issues/705 -->
+							<button	 th:if="${e.value} ==  true " 
+								
+								th:data-id="${e.key.id}" 
+								th:data-Pages="${Pages}"
+								th:data-TaillePages="${NbElementParPage}"
+			    				onclick="show(this.getAttribute('data-id'), this.getAttribute('data-Pages'), this.getAttribute('data-TaillePages'));"
+													
+								type="button" class="insciption btn btn-success">
+									Désinscription
+							</button>
+    						<button th:unless="${e.value} ==  true "
+    						
+								th:data-id="${e.key.id}" 
+								th:data-Page="${Page}"
+								th:data-TaillePages="${NbElementParPage}"
+			    				onclick="show(this.getAttribute('data-id'), this.getAttribute('data-Page'), this.getAttribute('data-TaillePages'));"
+
+    						 	type="button" class="insciption btn btn-primary" >
+    						 		Inscription
+    						 </button>
+
+					</td>				
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script >
+function show (id, page, taillePages){
+	console.info('parameter  ' + id + " "+ page+ " " + taillePages);
+	var url = "/Cantine/changeInscription?page=" + page + "&size="+taillePages + "&id=" + id;
+	$.ajax(url, {
+		success : function(data) {
+			$('#replace_div').html(data);
+		}
+	});
+	}
+</script>
+</html>
+
