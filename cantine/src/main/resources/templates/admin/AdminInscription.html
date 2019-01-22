@@ -20,25 +20,37 @@
 		<ul class="sync-pagination"></ul>
 	</div>
 	<script>
-		// script plugin barre de navigation dans les page
-		var $pagination = $('.sync-pagination');	
-		$pagination.twbsPagination({
-			totalPages : 30,
-			onPageClick : function(evt, page) {			
-				var nbElementParPage = [[${NbElementParPage}]];
-				var url = "/Cantine/listEleves?page=" + page + "&size="+nbElementParPage;
-				$.ajax(url, {
-					success : function(data) {
-						$('#replace_div').html(data);
-					}
-				});
-			}
-		});
-		var nbPages = [[${NbTotalPages}]];
-		console.info('nb pages '+ nbPages);
-		var currentPage = $pagination.twbsPagination("getCurrentPage");
-		console.info('CurrentPage '+ currentPage);
-		$pagination.twbsPagination("changeTotalPages", nbPages, currentPage);
+		$(function () {
+			// script plugin barre de navigation dans les page
+			var $pagination = $('.sync-pagination');	
+			$pagination.twbsPagination({
+				totalPages : 30,
+				onPageClick : function(evt, page) {			
+					var nbElementParPage = [[${NbElementParPage}]];
+					var url = "/Cantine/listEleves?page=" + page + "&size="+nbElementParPage;
+					$.ajax(url, {
+						success : function(data) {
+							$('#replace_div').html(data);
+						}
+					});
+				}
+			});
+			var nbPages = [[${NbTotalPages}]];
+			console.info('nb pages '+ nbPages);
+			var currentPage = $pagination.twbsPagination("getCurrentPage");
+			console.info('CurrentPage '+ currentPage);
+			$pagination.twbsPagination("changeTotalPages", nbPages, currentPage);
+		});	
+		
+		function show (id, page, taillePages){
+			console.info('parameter  ' + id + " "+ page+ " " + taillePages);
+			var url = "/Cantine/changeInscription?page=" + page + "&size="+taillePages + "&id=" + id;
+			$.ajax(url, {
+				success : function(data) {
+					$('#replace_div').html(data);
+				}
+			});
+		}		
 	</script>
 </body>
 </html>
