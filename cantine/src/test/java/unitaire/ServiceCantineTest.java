@@ -66,5 +66,47 @@ public class ServiceCantineTest {
             fail( "EnseignantNonAutentifie levée alors que l'enseignant est authentifié" );
         }
     }
+    
+    @Test
+    public void unEnseignantIdentifieDoitPouvoirDeInscrireUnEleve() {
+        cantineRepository = new InMemoryCantineRepository();
+        ServiceCantine serviceCantine = new ServiceCantine( autentificationGateway, cantineRepository );
+        Eleve eleve = new Eleve( "abc", "Marc", "DUPUIS" );
+        Enseignant enseignant = new Enseignant( "abc", "Paul", "DUPOND" );
 
+        when( autentificationGateway.currentEnseignant() ).thenReturn( Optional.of( enseignant ) );
+        try {
+            serviceCantine.enregisterPresence( enseignant, eleve );
+            assertTrue( serviceCantine.getCantineDuJour().contains( eleve ) );
+            serviceCantine.deEnregisterPresence( enseignant, eleve );
+            assertFalse( serviceCantine.getCantineDuJour().contains( eleve ) );
+        } catch ( EnseignantNonAutentifieException e ) {
+            fail( "EnseignantNonAutentifie levée alors que l'enseignant est authentifié" );
+        }
+        
+    }
+    
+    @Test
+    public void unEnseignantNonIdentifieNeDoitPasPouvoirDeInscrireUnEleve() {
+        cantineRepository = new InMemoryCantineRepository();
+        ServiceCantine serviceCantine = new ServiceCantine( autentificationGateway, cantineRepository );
+        Eleve eleve = new Eleve( "abc", "Marc", "DUPUIS" );
+        Enseignant enseignant = new Enseignant( "abc", "Paul", "DUPOND" );
+        Enseignant enseignantNonidentifié = new Enseignant( "def", "Françoise", "MULLER" );
+
+        when( autentificationGateway.currentEnseignant() ).thenReturn( Optional.of( enseignant ) );
+
+        try {
+            serviceCantine.enregisterPresence( enseignant, eleve );
+            assertTrue( serviceCantine.getCantineDuJour().contains( eleve ) );
+            serviceCantine.deEnregisterPresence( enseignantNonidentifié, eleve );
+            //élève toujours enregistré
+            assertTrue( serviceCantine.getCantineDuJour().stream().anyMatch( p -> p.equals( eleve ) ) );
+            fail( "EnseignantNonAutentifie non levée alors que l'enseignant n'est pas authentifié" );
+        } catch ( EnseignantNonAutentifieException e ) {
+            // Exception et élève toujours enregistré
+            assertTrue( serviceCantine.getCantineDuJour().stream().anyMatch( p -> p.equals( eleve ) ) );
+        }
+
+    }
 }

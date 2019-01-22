@@ -23,4 +23,9 @@ public class Cantine {
         return getCantineDuJour().contains( eleve );
     }
 
+    public void deEnregisterPresence( Eleve eleve ) {
+        
+        cantineRepository.remove( eleve );
+    }
+
 }

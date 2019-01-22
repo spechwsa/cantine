@@ -26,7 +26,7 @@ public class CantineSteps {
 
     private ServiceCantine       serviceCantine;
 
-    private boolean              alertInscriptionImpossibleGenerated = false;
+    private boolean              alertIdentificationImpossibleGenerated = false;
 
     public CantineSteps( AuthenticationGateway authenticationGateway, EleveRepository eleveRepository,
             CantineRepository cantineRepository, EnseignantRepository enseignantRepository ) {
@@ -47,9 +47,9 @@ public class CantineSteps {
             // inscription
             try {
                 serviceCantine.enregisterPresence( optionalEnseignant.get(), optionalEleve.get() );
-                alertInscriptionImpossibleGenerated = false;
+                alertIdentificationImpossibleGenerated = false;
             } catch ( EnseignantNonAutentifieException e ) {
-                alertInscriptionImpossibleGenerated = true;
+                alertIdentificationImpossibleGenerated = true;
             }
         }
     }
@@ -77,6 +77,25 @@ public class CantineSteps {
 
     @Alors( "une alerte pour identification de l enseignant impossible" )
     public void une_alerte_pour_identification_de_l_enseignant_impossible() {
-        assertTrue( alertInscriptionImpossibleGenerated );
+        assertTrue( alertIdentificationImpossibleGenerated );
+    }
+    
+    @Quand("je {string} tente de désinscrire l'élève {string}")
+    public void je_tente_d_déssinscrire_l_élève(String nomEnseignant, String nomEleve) {
+        // récupération de l'éléve
+        Optional<Eleve> optionalEleve = eleveRepository.getAll().stream()
+                .filter( c -> c.getLastName().equals( nomEleve ) ).findFirst();
+        // récupération de l'enseignant
+        Optional<Enseignant> optionalEnseignant = enseignantRepository.getAll().stream()
+                .filter( c -> c.getLastName().equals( nomEnseignant ) ).findFirst();
+        if ( optionalEleve.isPresent() && optionalEnseignant.isPresent() ) {
+            // désinscription
+            try {
+                serviceCantine.deEnregisterPresence( optionalEnseignant.get(), optionalEleve.get() );
+                alertIdentificationImpossibleGenerated = false;
+            } catch ( EnseignantNonAutentifieException e ) {
+                alertIdentificationImpossibleGenerated = true;
+            }
+        }
     }
 }

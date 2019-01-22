@@ -8,4 +8,6 @@ public interface CantineRepository {
     void add( Eleve eleve );
 
     Set<Eleve> getAll();
+
+    void remove( Eleve eleve );
 }

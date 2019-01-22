@@ -39,4 +39,14 @@ public class ServiceCantine {
         return cantine.estEnregistreAujourdhui( eleve );
     }
 
+    public void deEnregisterPresence( Enseignant enseignant, Eleve eleve ) throws EnseignantNonAutentifieException {
+        if ( autentificationGateway.currentEnseignant().isPresent()
+                && autentificationGateway.currentEnseignant().get().equals( enseignant ) )
+            cantine.deEnregisterPresence( eleve );
+        else {
+            throw ( new EnseignantNonAutentifieException( enseignant ) );
+        }
+        
+    }
+
 }

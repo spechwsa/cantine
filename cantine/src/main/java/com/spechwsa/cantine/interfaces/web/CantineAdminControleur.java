@@ -100,7 +100,13 @@ public class CantineAdminControleur {
             Eleve eleve = optionalEleve.get();
             if ( serviceCantine.estEnregistreAujourdhui( eleve ) ) {
                 // on le désincrit
-            } else {
+                try {
+                    // ToDo remplacer l'enseignat en dur
+                    serviceCantine.deEnregisterPresence( new Enseignant( "a", "Françoise", "MULLER" ), eleve );
+                } catch ( EnseignantNonAutentifieException e ) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }           } else {
                 // on l'inscrit
                 try {
                     // ToDo remplacer l'enseignat en dur

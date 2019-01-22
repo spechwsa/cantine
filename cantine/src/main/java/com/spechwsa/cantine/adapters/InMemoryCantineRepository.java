@@ -21,4 +21,10 @@ public class InMemoryCantineRepository implements CantineRepository {
         return eleves;
     }
 
+    @Override
+    public void remove( Eleve eleve ) {
+        // TODO Auto-generated method stub
+        eleves.remove( eleve );
+    }
+
 }

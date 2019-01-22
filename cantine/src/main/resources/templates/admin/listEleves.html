@@ -29,9 +29,9 @@ th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
 							<button	 th:if="${e.value} ==  true " 
 								
 								th:data-id="${e.key.id}" 
-								th:data-Pages="${Pages}"
+								th:data-Page="${Page}"
 								th:data-TaillePages="${NbElementParPage}"
-			    				onclick="show(this.getAttribute('data-id'), this.getAttribute('data-Pages'), this.getAttribute('data-TaillePages'));"
+			    				onclick="show(this.getAttribute('data-id'), this.getAttribute('data-Page'), this.getAttribute('data-TaillePages'));"
 													
 								type="button" class="insciption btn btn-success">
 									Désinscription
