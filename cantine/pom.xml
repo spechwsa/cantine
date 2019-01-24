@@ -6,7 +6,7 @@
 	<groupId>com.spechwsa</groupId>
 	<artifactId>cantine</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>Cantine</name>
 	<description>Enregistrer les eleves qui déjeunent</description>
 
@@ -81,6 +81,15 @@ thymeleaf-spring4
 			<version>2.1.1.RELEASE</version>
 		</dependency>
 
+		<!-- pour generation war -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+			<version>2.1.1.RELEASE</version>
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -114,6 +123,14 @@ thymeleaf-spring4
 		    <artifactId>webjars-locator</artifactId>
 		    <version>0.34</version>
 		</dependency>
+<!-- to fix issue in wildfly  -->
+<!--  http://xxxxx:8080/cantine-0.0.1-SNAPSHOT/webjars/bootstrap/css/bootstrap.min.css net::ERR_ABORTED 404 (Not Found) -->
+<!-- https://stackoverflow.com/questions/39051499/spring-boot-web-app-deployed-to-jboss-webjars-locator-does-not-appear-to-work -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>webjars-locator-jboss-vfs</artifactId>
+    <version>0.1.0</version>
+</dependency>
 
 	</dependencies>
 

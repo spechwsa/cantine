@@ -27,7 +27,7 @@
 				totalPages : 30,
 				onPageClick : function(evt, page) {			
 					var nbElementParPage = [[${NbElementParPage}]];
-					var url = "/Cantine/listEleves?page=" + page + "&size="+nbElementParPage;
+					var url = "listEleves?page=" + page + "&size="+nbElementParPage;
 					$.ajax(url, {
 						success : function(data) {
 							$('#replace_div').html(data);
@@ -44,7 +44,7 @@
 		
 		function show (id, page, taillePages){
 			console.info('parameter  ' + id + " "+ page+ " " + taillePages);
-			var url = "/Cantine/changeInscription?page=" + page + "&size="+taillePages + "&id=" + id;
+			var url = "changeInscription?page=" + page + "&size="+taillePages + "&id=" + id;
 			$.ajax(url, {
 				success : function(data) {
 					$('#replace_div').html(data);
