@@ -82,7 +82,7 @@ public class CantineAdminControleur {
     private String miseAJourVueFragmentListEleve( Model model, int page, int nbElementParPage ) {
         Map<Eleve, Boolean> eleveCantineMap = creeMapEleveCantine( page - 1, nbElementParPage );
 
-        // On stocke élèvesCantine dans le Model sous l'attribut
+        // On stocke Ã©lÃ¨vesCantine dans le Model sous l'attribut
         // "EleveCantineMap"
         model.addAttribute( MODEL_ATTIBUTE_ELEVE_CANTINE_MAP, eleveCantineMap );
         model.addAttribute( MODEL_ATTIBUTE_PAGE_COURANTE, page );
@@ -92,17 +92,17 @@ public class CantineAdminControleur {
     }
 
     private void miseAJourInscription( String id ) {
-        // récupération de l'éléve
+        // rÃ©cupÃ©ration de l'Ã©lÃ©ve
         Optional<Eleve> optionalEleve = eleveRepository.getAll().stream()
                 .filter( c -> c.getId().equals( id ) ).findFirst();
 
         if ( optionalEleve.isPresent() ) {
             Eleve eleve = optionalEleve.get();
             if ( serviceCantine.estEnregistreAujourdhui( eleve ) ) {
-                // on le désincrit
+                // on le dÃ©sincrit
                 try {
                     // ToDo remplacer l'enseignat en dur
-                    serviceCantine.deEnregisterPresence( new Enseignant( "a", "Françoise", "MULLER" ), eleve );
+                    serviceCantine.deEnregisterPresence( new Enseignant( "a", "FranÃ§oise", "MULLER" ), eleve );
                 } catch ( EnseignantNonAutentifieException e ) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -110,7 +110,7 @@ public class CantineAdminControleur {
                 // on l'inscrit
                 try {
                     // ToDo remplacer l'enseignat en dur
-                    serviceCantine.enregisterPresence( new Enseignant( "a", "Françoise", "MULLER" ), eleve );
+                    serviceCantine.enregisterPresence( new Enseignant( "a", "FranÃ§oise", "MULLER" ), eleve );
                 } catch ( EnseignantNonAutentifieException e ) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -120,32 +120,32 @@ public class CantineAdminControleur {
     }
 
     private Map<Eleve, Boolean> creeMapEleveCantine( int p, int s ) {
-        // Création de L'objet Map<Eleve, Boolean> pour affichage dans la vue
-        // ordre alphabétique.
-        // On crée une LinkedHashMap au lieux d'une HashMap pour préserver
+        // CrÃ©ation de L'objet Map<Eleve, Boolean> pour affichage dans la vue
+        // ordre alphabÃ©tique.
+        // On crÃ©e une LinkedHashMap au lieux d'une HashMap pour prÃ©server
         // l'ordre
-        // en cas de doublon inséré on prend le premier
+        // en cas de doublon insÃ©rÃ© on prend le premier
         Map<Eleve, Boolean> eleveCantineMap = eleveRepository.getAll().stream()
                 .sorted( Comparator.comparing( Eleve::getLastName ) )
                 .skip( p * s ).limit( s )
                 .collect(
                         Collectors.toMap(
-                                eleve -> { // construction clée
+                                eleve -> { // construction clÃ©e
                                     return eleve;
                                 },
                                 eleve -> { // construction valeur
                                     return serviceCantine.estEnregistreAujourdhui( eleve );
                                 },
                                 ( e1, e2 ) -> e1, // gestion doublon
-                                LinkedHashMap::new // type de Map générée
+                                LinkedHashMap::new // type de Map gÃ©nÃ©rÃ©e
                         ) );
         return eleveCantineMap;
     }
 
     private void initialisationPourTestEtASuprimer() {
-        authentificationGateway.authenticate( new Enseignant( "a", "Françoise", "MULLER" ) );
+        authentificationGateway.authenticate( new Enseignant( "a", "FranÃ§oise", "MULLER" ) );
         try {
-            serviceCantine.enregisterPresence( new Enseignant( "a", "Françoise", "MULLER" ),
+            serviceCantine.enregisterPresence( new Enseignant( "a", "FranÃ§oise", "MULLER" ),
                     new Eleve( "YOW72VJV9HQ", "Zia", "Ashley" ) );
         } catch ( EnseignantNonAutentifieException e ) {
             e.printStackTrace();

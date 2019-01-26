@@ -15,8 +15,8 @@ public class EnseignantNonAutentifieException extends Exception {
     @Override
     public String getMessage() {
         // TODO Auto-generated method stub
-        return "Authentification préalable obiligatoire: l'enseignant " + enseignant.getLastName()
-                + " n'est pas authentifié";
+        return "Authentification prÃ©alable obiligatoire: l'enseignant " + enseignant.getLastName()
+                + " n'est pas authentifiÃ©";
     }
 
 }

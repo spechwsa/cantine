@@ -1,5 +1,5 @@
 /**
- * Interface WEB du service d'inscription à la cantine.
+ * Interface WEB du service d'inscription Ã  la cantine.
  */
 /**
  * @author spechwsa

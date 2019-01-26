@@ -38,13 +38,13 @@ public class ServiceCantineTest {
         ServiceCantine serviceCantine = new ServiceCantine( autentificationGateway, cantineRepository );
         Eleve eleve = new Eleve( "abc", "Marc", "DUPUIS" );
         Enseignant enseignant = new Enseignant( "abc", "Paul", "DUPOND" );
-        Enseignant enseignantNonidentifié = new Enseignant( "def", "Françoise", "MULLER" );
+        Enseignant enseignantNonidentifiÃ© = new Enseignant( "def", "FranÃ§oise", "MULLER" );
 
         when( autentificationGateway.currentEnseignant() ).thenReturn( Optional.of( enseignant ) );
 
         try {
-            serviceCantine.enregisterPresence( enseignantNonidentifié, eleve );
-            fail( "EnseignantNonAutentifie non levée alors que l'enseignant n'est pas authentifié" );
+            serviceCantine.enregisterPresence( enseignantNonidentifiÃ©, eleve );
+            fail( "EnseignantNonAutentifie non levÃ©e alors que l'enseignant n'est pas authentifiÃ©" );
         } catch ( EnseignantNonAutentifieException e ) {
             assertFalse( serviceCantine.getCantineDuJour().stream().anyMatch( p -> p.equals( eleve ) ) );
         }
@@ -63,7 +63,7 @@ public class ServiceCantineTest {
             serviceCantine.enregisterPresence( enseignant, eleve );
             assertTrue( serviceCantine.getCantineDuJour().contains( eleve ) );
         } catch ( EnseignantNonAutentifieException e ) {
-            fail( "EnseignantNonAutentifie levée alors que l'enseignant est authentifié" );
+            fail( "EnseignantNonAutentifie levÃ©e alors que l'enseignant est authentifiÃ©" );
         }
     }
     
@@ -81,7 +81,7 @@ public class ServiceCantineTest {
             serviceCantine.deEnregisterPresence( enseignant, eleve );
             assertFalse( serviceCantine.getCantineDuJour().contains( eleve ) );
         } catch ( EnseignantNonAutentifieException e ) {
-            fail( "EnseignantNonAutentifie levée alors que l'enseignant est authentifié" );
+            fail( "EnseignantNonAutentifie levÃ©e alors que l'enseignant est authentifiÃ©" );
         }
         
     }
@@ -92,19 +92,19 @@ public class ServiceCantineTest {
         ServiceCantine serviceCantine = new ServiceCantine( autentificationGateway, cantineRepository );
         Eleve eleve = new Eleve( "abc", "Marc", "DUPUIS" );
         Enseignant enseignant = new Enseignant( "abc", "Paul", "DUPOND" );
-        Enseignant enseignantNonidentifié = new Enseignant( "def", "Françoise", "MULLER" );
+        Enseignant enseignantNonidentifiÃ© = new Enseignant( "def", "FranÃ§oise", "MULLER" );
 
         when( autentificationGateway.currentEnseignant() ).thenReturn( Optional.of( enseignant ) );
 
         try {
             serviceCantine.enregisterPresence( enseignant, eleve );
             assertTrue( serviceCantine.getCantineDuJour().contains( eleve ) );
-            serviceCantine.deEnregisterPresence( enseignantNonidentifié, eleve );
-            //élève toujours enregistré
+            serviceCantine.deEnregisterPresence( enseignantNonidentifiÃ©, eleve );
+            //Ã©lÃ¨ve toujours enregistrÃ©
             assertTrue( serviceCantine.getCantineDuJour().stream().anyMatch( p -> p.equals( eleve ) ) );
-            fail( "EnseignantNonAutentifie non levée alors que l'enseignant n'est pas authentifié" );
+            fail( "EnseignantNonAutentifie non levÃ©e alors que l'enseignant n'est pas authentifiÃ©" );
         } catch ( EnseignantNonAutentifieException e ) {
-            // Exception et élève toujours enregistré
+            // Exception et Ã©lÃ¨ve toujours enregistrÃ©
             assertTrue( serviceCantine.getCantineDuJour().stream().anyMatch( p -> p.equals( eleve ) ) );
         }
 

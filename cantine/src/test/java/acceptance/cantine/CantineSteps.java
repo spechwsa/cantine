@@ -35,12 +35,12 @@ public class CantineSteps {
         this.serviceCantine = new ServiceCantine( authenticationGateway, cantineRepository );
     }
 
-    @Quand( "je {string} tente d inscrire l'élève {string}" )
-    public void je_tente_d_inscrire_l_élève( String nomEnseignant, String nomEleve ) {
-        // récupération de l'éléve
+    @Quand( "je {string} tente d inscrire l'Ã©lÃ¨ve {string}" )
+    public void je_tente_d_inscrire_l_Ã©lÃ¨ve( String nomEnseignant, String nomEleve ) {
+        // rÃ©cupÃ©ration de l'Ã©lÃ©ve
         Optional<Eleve> optionalEleve = eleveRepository.getAll().stream()
                 .filter( c -> c.getLastName().equals( nomEleve ) ).findFirst();
-        // récupération de l'enseignant
+        // rÃ©cupÃ©ration de l'enseignant
         Optional<Enseignant> optionalEnseignant = enseignantRepository.getAll().stream()
                 .filter( c -> c.getLastName().equals( nomEnseignant ) ).findFirst();
         if ( optionalEleve.isPresent() && optionalEnseignant.isPresent() ) {
@@ -56,7 +56,7 @@ public class CantineSteps {
 
     @Alors( "{string} est inscrit" )
     public void est_inscrit( String nomEleve ) {
-        // récupération de l'éléve
+        // rÃ©cupÃ©ration de l'Ã©lÃ©ve
         Optional<Eleve> optionalEleve = eleveRepository.getAll().stream()
                 .filter( c -> c.getLastName().equals( nomEleve ) ).findFirst();
         // verification inscription
@@ -64,12 +64,12 @@ public class CantineSteps {
             assertTrue( serviceCantine.getCantineDuJour().contains( optionalEleve.get() ) );
             assertTrue(serviceCantine.estEnregistreAujourdhui(optionalEleve.get()));
         } catch ( NoSuchElementException e ) {
-            fail( "Eléve non trouvé" );
+            fail( "ElÃ©ve non trouvÃ©" );
         }
     }
 
-    @Soit( "l éléve {string} n'est pas inscrit" )
-    public void l_éléve_n_est_pas_inscrit( String nomEleve ) {
+    @Soit( "l Ã©lÃ©ve {string} n'est pas inscrit" )
+    public void l_Ã©lÃ©ve_n_est_pas_inscrit( String nomEleve ) {
         Optional<Eleve> optionalEleve = eleveRepository.getAll().stream()
                 .filter( c -> c.getLastName().equals( nomEleve ) ).findFirst();
         assertFalse( serviceCantine.getCantineDuJour().contains( optionalEleve.get() ) );
@@ -80,16 +80,16 @@ public class CantineSteps {
         assertTrue( alertIdentificationImpossibleGenerated );
     }
     
-    @Quand("je {string} tente de désinscrire l'élève {string}")
-    public void je_tente_d_déssinscrire_l_élève(String nomEnseignant, String nomEleve) {
-        // récupération de l'éléve
+    @Quand("je {string} tente de dÃ©sinscrire l'Ã©lÃ¨ve {string}")
+    public void je_tente_d_dÃ©ssinscrire_l_Ã©lÃ¨ve(String nomEnseignant, String nomEleve) {
+        // rÃ©cupÃ©ration de l'Ã©lÃ©ve
         Optional<Eleve> optionalEleve = eleveRepository.getAll().stream()
                 .filter( c -> c.getLastName().equals( nomEleve ) ).findFirst();
-        // récupération de l'enseignant
+        // rÃ©cupÃ©ration de l'enseignant
         Optional<Enseignant> optionalEnseignant = enseignantRepository.getAll().stream()
                 .filter( c -> c.getLastName().equals( nomEnseignant ) ).findFirst();
         if ( optionalEleve.isPresent() && optionalEnseignant.isPresent() ) {
-            // désinscription
+            // dÃ©sinscription
             try {
                 serviceCantine.deEnregisterPresence( optionalEnseignant.get(), optionalEleve.get() );
                 alertIdentificationImpossibleGenerated = false;

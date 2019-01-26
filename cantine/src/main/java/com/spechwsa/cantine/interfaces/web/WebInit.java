@@ -5,7 +5,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 import com.spechwsa.cantine.Application;
 
-// pour la creation de la premiere servlet en cas de génération de war
+// pour la creation de la premiere servlet en cas de gÃ©nÃ©ration de war
 public class WebInit extends SpringBootServletInitializer {
 
     @Override

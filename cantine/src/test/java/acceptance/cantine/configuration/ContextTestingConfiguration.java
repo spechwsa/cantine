@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
  * Voir https://www.baeldung.com/cucumber-spring-integration ne marche plus avec 2 class de steps car
  * essai de creer deux fois le context.
  * voir https://github.com/cucumber/cucumber-jvm/issues/1420
- * utiliser la solution du before mais il faut mettre tous dans le même package.
+ * utiliser la solution du before mais il faut mettre tous dans le mÃªme package.
 */
 @ContextConfiguration( classes = {
         RepositoriesConfiguration.class,

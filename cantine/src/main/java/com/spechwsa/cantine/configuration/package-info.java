@@ -1,7 +1,7 @@
 /**
  * Specifique Framework SPRING.
  * Contient la classe de creation des Beans initiaux.
- * et la classe d'init des bases de données
+ * et la classe d'init des bases de donnÃ©es
  */
 /**
  * @author spechwsa

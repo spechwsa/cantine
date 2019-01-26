@@ -20,9 +20,9 @@ import com.spechwsa.cantine.domain.repositories.EnseignantRepository;
 
 /**
  * https://dzone.com/articles/spring-boot-applicationrunner-and-commandlinerunne
- * Pour que ce composant s'execute Mettre la propriété cantine.db.init à true
- * dans le fichier application.properties le fichier xml de creation des éléves
- * à été réalisé depuis http://www.generatedata.com/
+ * Pour que ce composant s'execute Mettre la propriÃ©tÃ© cantine.db.init Ã  true
+ * dans le fichier application.properties le fichier xml de creation des Ã©lÃ©ves
+ * Ã  Ã©tÃ© rÃ©alisÃ© depuis http://www.generatedata.com/
  **/
 
 @Component
@@ -50,12 +50,12 @@ public class DdInit implements CommandLineRunner {
         // TODO Auto-generated method stub
         System.out.println( "Init base de test" );
         initFakeInMemoryRepo();
-        System.out.println( "base de test initialisée" );
+        System.out.println( "base de test initialisÃ©e" );
     }
 
     private void initFakeInMemoryRepo() {
         initFakeElevesRepo();
-        enseignantRepository.add( new Enseignant( "a", "Françoise", "MULLER" ) );
+        enseignantRepository.add( new Enseignant( "a", "FranÃ§oise", "MULLER" ) );
         enseignantRepository.add( new Enseignant( "addd", "Paul", "DUPUIS" ) );
     }
 
@@ -104,7 +104,7 @@ public class DdInit implements CommandLineRunner {
                         continue;
                     }
                 }
-                // si fin de l'element élève on l'ajoute dans la base
+                // si fin de l'element Ã©lÃ¨ve on l'ajoute dans la base
                 if ( event.isEndElement() ) {
                     EndElement endElement = event.asEndElement();
                     if ( endElement.getName().getLocalPart().equals( TAG_ELEVE ) ) {
