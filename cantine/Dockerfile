@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM openjdk:10
+FROM openjdk:11
 	
 # Add Maintainer Info
 LABEL maintainer="spechwsa@gmail.com"
